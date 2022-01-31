@@ -1,0 +1,10 @@
+version: "3"
+services:
+  build:
+    image: lucamora/device-os:2.3.0
+    container_name: deviceos
+    volumes:
+      - ./:/app
+      - deviceos:/deviceos
+volumes:
+  deviceos:
