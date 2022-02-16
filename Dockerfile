@@ -3,7 +3,7 @@ LABEL maintainer="Luca Morandini <lucamorait@gmail.com>"
 
 # install crc32
 RUN apt-get update \
-    && apt-get -y install libarchive-zip-perl
+    && apt-get -y install libarchive-zip-perl xxd
 
 WORKDIR /tools
 
