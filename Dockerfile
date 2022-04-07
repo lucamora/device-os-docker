@@ -1,18 +1,25 @@
-FROM gcc:11.2.0
+FROM gcc:9.4.0
 LABEL maintainer="Luca Morandini <lucamorait@gmail.com>"
 
-# install crc32
-RUN apt-get update \
-    && apt-get -y install libarchive-zip-perl xxd
+ARG TARGETARCH
+ARG DOS_VER_STR
+ARG DOS_VER_NUM
 
-WORKDIR /tools
+# environment variables for device-os version
+ENV DEVICEOS_VERSION_STRING=$DOS_VER_STR
+ENV DEVICEOS_VERSION_NUMBER=$DOS_VER_NUM
+
+# environment variables for gcc-arm version
+ENV GCC_ARM_VERSION="9-2020q2"
+ENV GCC_ARM_RELEASE="9-2020-q2-update"
 
 # install gcc-arm toolchain
-RUN wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-aarch64-linux.tar.bz2 \
-    && tar xvf gcc-arm-none-eabi-10.3-2021.10-aarch64-linux.tar.bz2 \
-    && rm gcc-arm-none-eabi-10.3-2021.10-aarch64-linux.tar.bz2
+WORKDIR /tools
+COPY install_toolchain.sh .
+RUN chmod u+x install_toolchain.sh \
+    && ./install_toolchain.sh
 
-ENV PATH $PATH:/tools/gcc-arm-none-eabi-10.3-2021.10/bin
+ENV PATH $PATH:/tools/gcc-arm-none-eabi-${GCC_ARM_RELEASE}/bin
 
 # copy device-os folder
 COPY ./deviceos /deviceos
