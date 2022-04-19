@@ -4,6 +4,7 @@
 
 ## Available tags
 Each **image tag** is associated to a **release** of the DeviceOS:
+- [`v1.5.2`](https://github.com/particle-iot/device-os/releases/tag/v1.5.2)
 
 ## How to use
 Clone the [`docker-compose.template.yml`](docker-compose.template.yml) inside the firmware folder and run the following command:
