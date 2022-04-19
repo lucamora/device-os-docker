@@ -19,6 +19,11 @@ COPY install_toolchain.sh .
 RUN chmod u+x install_toolchain.sh \
     && ./install_toolchain.sh
 
+# install particle-cli
+COPY install_cli.sh .
+RUN chmod u+x install_cli.sh \
+    && ./install_cli.sh
+
 ENV PATH $PATH:/tools/gcc-arm-none-eabi-${GCC_ARM_RELEASE}/bin
 
 # copy device-os folder
