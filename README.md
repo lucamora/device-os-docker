@@ -1,6 +1,6 @@
 # DeviceOS Docker Image
 
-[Docker image](https://github.com/lucamora/device-os-docker/pkgs/container/device-os) of [DeviceOS](https://github.com/particle-iot/device-os) for building locally firmware for Particle Devices.
+[Docker image](https://hub.docker.com/r/lucamora/device-os) of [DeviceOS](https://github.com/particle-iot/device-os) for building locally firmware for Particle Devices.
 
 ## Available tags
 Each **image tag** is associated to a **release** of the DeviceOS:
@@ -21,7 +21,7 @@ The **DeviceOS folder** (located in the `/deviceos` directory inside the contain
 version: "3"
 services:
   build:
-    image: ghcr.io/lucamora/device-os:1.2.3
+    image: lucamora/device-os:1.2.3
     container_name: deviceos
     volumes:
       - ./:/app
