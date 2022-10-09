@@ -4,6 +4,7 @@
 
 ## Available tags
 Each **image tag** is associated to a **release** of the DeviceOS:
+- [`v2.3.0`](https://github.com/particle-iot/device-os/releases/tag/v2.3.0)
 - [`v1.5.2`](https://github.com/particle-iot/device-os/releases/tag/v1.5.2)
 
 ## How to use
