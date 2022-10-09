@@ -1,17 +1,18 @@
-FROM gcc:9.4.0
+FROM ubuntu:22.04
 LABEL maintainer="Luca Morandini <lucamorait@gmail.com>"
 
 ARG TARGETARCH
 ARG DOS_VER_STR
 ARG DOS_VER_NUM
+ARG DOS_GIT_SHA
 
 # environment variables for device-os version
 ENV DEVICEOS_VERSION_STRING=$DOS_VER_STR
 ENV DEVICEOS_VERSION_NUMBER=$DOS_VER_NUM
 
 # environment variables for gcc-arm version
-ENV GCC_ARM_VERSION="9-2020q2"
-ENV GCC_ARM_RELEASE="9-2020-q2-update"
+ENV GCC_ARM_VERSION="10-2020q4"
+ENV GCC_ARM_RELEASE="10-2020-q4-major"
 
 # install gcc-arm toolchain
 WORKDIR /tools
@@ -19,15 +20,12 @@ COPY install_toolchain.sh .
 RUN chmod u+x install_toolchain.sh \
     && ./install_toolchain.sh
 
-# install particle-cli
-COPY install_cli.sh .
-RUN chmod u+x install_cli.sh \
-    && ./install_cli.sh
-
 ENV PATH $PATH:/tools/gcc-arm-none-eabi-${GCC_ARM_RELEASE}/bin
 
-# copy device-os folder
-COPY ./deviceos /deviceos
+# clone device-os repo
+COPY clone_repo.sh .
+RUN chmod u+x clone_repo.sh \
+    && ./clone_repo.sh
 
 WORKDIR /app
 

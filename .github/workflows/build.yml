@@ -25,11 +25,11 @@ jobs:
           cat ${{ env.VERSION_FILE }} >> $GITHUB_ENV
       
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: lucamora/${{ env.IMAGE_NAME }}
           flavor: |
@@ -38,18 +38,19 @@ jobs:
             type=raw,value=${{ env.DEVICEOS_VERSION_STRING }}
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and push to Docker Hub
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           build-args: |
             DOS_VER_STR=${{ env.DEVICEOS_VERSION_STRING }}
             DOS_VER_NUM=${{ env.DEVICEOS_VERSION_NUMBER }}
+            DOS_GIT_SHA=${{ env.DEVICEOS_GIT_COMMIT_SHA }}
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}

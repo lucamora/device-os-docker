@@ -10,8 +10,8 @@ else
 fi
 
 # install crc32 and xxd
-apt-get update && \
-apt-get -y install libarchive-zip-perl xxd
+apt update && \
+apt -y install libarchive-zip-perl xxd wget bzip2 git make
 
 # install and extract gcc-arm toolchain
 wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/${GCC_ARM_VERSION}/gcc-arm-none-eabi-${GCC_ARM_RELEASE}-${GCC_ARM_ARCH}-linux.tar.bz2 && \
