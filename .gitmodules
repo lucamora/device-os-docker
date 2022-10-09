@@ -1,3 +1,0 @@
-[submodule "deviceos"]
-	path = deviceos
-	url = git@github.com:particle-iot/device-os.git
